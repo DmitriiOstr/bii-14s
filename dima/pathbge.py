@@ -34,34 +34,34 @@ if __name__ == "__main__":
 	with open('pathbge1.in') as inp_file:
 		first_line=inp_file.readline().strip().split()
 		for lines in inp_file:
-			line=lines.strip().split()
+			line = lines.strip().split()
 			G.add_edge(int(line[0]),int(line[1]))
-	n=int(first_line[0])
+	n = int(first_line[0])
 	for i in range(1,n+1):
 		G.add_node(i)
 	def graph_path(p):
-		j=0
-		lst_visited=[]		#list of visited node
-		current_lst=[]		#list of current node
-		dct_path={}			#dict path_lenght:[node_list]
-		current_level=p
-		next_level=list(G.neighbor[p])		#list of next level node
+		j = 0
+		lst_visited = []		#list of visited node
+		current_lst = []		#list of current node
+		dct_path = {}			#dict path_lenght:[node_list]
+		current_level = p
+		next_level = list(G.neighbor[p])		#list of next level node
 		lst_visited.append(p)
-		dct_path[0]=p
-		while len(lst_visited)!=len(G.neighbor):
-			j+=1
-			current_level=next_level
-			next_level=[]
+		dct_path[0] = p
+		while len(lst_visited) != len(G.neighbor):
+			j += 1
+			current_level = next_level
+			next_level = []
 			for item in current_level:
 				if item not in lst_visited:
 					current_lst.append(item)
 					lst_visited.append(item)
 					for items in G.neighbor[item]:
 						next_level.append(items)
-			dct_path[j]=current_lst
-			current_lst=[]
+			dct_path[j] = current_lst
+			current_lst = []
 		return dct_path
-	dct_path=graph_path(1)
+	dct_path = graph_path(1)
 	node_dict = {}		# Num of conn.comp:[list of node] to node: Num of conn.comp
 	for key in dct_path:
 		node = dct_path[key]
